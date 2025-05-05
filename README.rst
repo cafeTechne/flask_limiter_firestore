@@ -1,9 +1,3 @@
-"""
-Flask-Limiter-Firestore
-========================
-
-A Firestore backend for Flask-Limiter that enables serverless, distributed rate limiting without Redis or Memcached.
-
 🔧 Features
 -----------
 - ✅ Drop-in replacement for Redis/Memcached backends
@@ -67,4 +61,3 @@ Use a TTL index on the `expires_at` field in Firestore for auto-deletion.
 📄 License
 ----------
 MIT License © 2025 Delivery Disruptor Inc.
-"""
