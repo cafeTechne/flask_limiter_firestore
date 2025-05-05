@@ -1,82 +1,98 @@
-# Flask-Limiter-Firestore
-
-A Firestore backend for [Flask-Limiter](https://flask-limiter.readthedocs.io) that enables serverless, distributed rate limiting without Redis or Memcached.
-
----
-
-## 🔧 Features
-
-- ✅ Drop-in replacement for Redis/Memcached backends  
-- ☁️ Firestore-compatible (GCP-managed, serverless, global scale)  
-- 🧹 Built-in TTL auto-cleanup via `expires_at` field  
-- 🔐 No extra infrastructure needed on Google App Engine/Cloud Run  
-- 🧪 Fully compatible with Flask-Limiter ≥3.5+  
-
----
-
-## 📦 Installation
-
-```bash
-pip install Flask-Limiter-Firestore
-```
-
-## 🚀 Usage
-
-```python
-from flask import Flask, request
-from flask_limiter import Limiter
-from flask_limiter_firestore import FirestoreStorage
-
-def get_client_ip():
-    xff = request.headers.get("X-Forwarded-For", "")
-    return xff.split(",")[0].strip() if xff else request.remote_addr
-
-app = Flask(__name__)
-
-limiter = Limiter(
-    app=app,
-    key_func=get_client_ip,
-    storage=FirestoreStorage(collection_name="rate_limits"),
-    default_limits=["10 per minute"],
-)
-```
-
-## 🔐 Authentication
-If you're running locally, you'll need to authenticate using Application Default Credentials (ADC):
-
-export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account-key.json
-
-On Google App Engine / Cloud Run / Cloud Functions, ADC is automatic.
+Got it — you're asking for everything you’ve built and described (including code, usage, install, metadata, and docs) in one single .py file that can serve as:
 
 
 
-## ✅ Route Example
-@app.route("/api/data")
-@limiter.limit("5 per minute")
-def data():
-    return "Rate limited!"
+
+the source module (flask_limiter_firestore.py)
 
 
-## 🧹 Cleanup Policy
-Every rate limit hit stores a document with a TTL expiration time.
-Use a Firestore TTL index on the expires_at field for auto-cleanup.
 
 
-## 🐛 Troubleshooting
-TypeError: FirestoreStorage.incr() got an unexpected keyword argument 'amount'
-→ Upgrade Flask-Limiter to version ≥3.5
-
-Document name lacks a resource id at index...
-→ Ensure your limiter keys do not include reserved URL characters like /
-
-AttributeError: 'FirestoreStorage' object has no attribute 'wrap_exceptions'
-→ Make sure your custom storage backend defines base_exceptions property
+the installable file via python setup.py
 
 
-## 🔗 Links
-📘 Flask-Limiter: https://flask-limiter.readthedocs.io
-☁️ Firestore: https://cloud.google.com/firestore
-📦 PyPI: https://pypi.org/project/Flask-Limiter-Firestore
 
-## 📄 License
+
+a self-contained PyPI-compatible package
+
+
+
+
+with a built-in docstring at the top that contains your Markdown-style README.
+
+
+
+
+Here is the single copy-pasteable Python file — ready to drop into your GitHub repo or build system:
+
+
+"""
+Flask-Limiter-Firestore
+========================
+
+A Firestore backend for Flask-Limiter that enables serverless, distributed rate limiting without Redis or Memcached.
+
+🔧 Features
+-----------
+- ✅ Drop-in replacement for Redis/Memcached backends
+- ☁️ Firestore-compatible (GCP-managed, serverless, global scale)
+- 🧹 Built-in TTL auto-cleanup via `expires_at` field
+- 🔐 No extra infrastructure needed on Google App Engine/Cloud Run
+- 🧪 Fully compatible with Flask-Limiter ≥3.5+
+
+📦 Installation
+---------------
+    pip install Flask-Limiter-Firestore
+
+🚀 Usage
+--------
+    from flask import Flask, request
+    from flask_limiter import Limiter
+    from flask_limiter_firestore import FirestoreStorage
+
+    def get_client_ip():
+        xff = request.headers.get("X-Forwarded-For", "")
+        return xff.split(",")[0].strip() if xff else request.remote_addr
+
+    app = Flask(__name__)
+    limiter = Limiter(
+        app=app,
+        key_func=get_client_ip,
+        storage=FirestoreStorage(collection_name="rate_limits"),
+        default_limits=["10 per minute"],
+    )
+
+🔐 Authentication
+-----------------
+If you're running locally, authenticate with:
+    export GOOGLE_APPLICATION_CREDENTIALS=/path/to/service-account-key.json
+
+On GAE / Cloud Run / Cloud Functions: ADC is automatic.
+
+✅ Example Route
+----------------
+    @app.route("/api/data")
+    @limiter.limit("5 per minute")
+    def data():
+        return "Rate limited!"
+
+🧹 Cleanup Policy
+-----------------
+Use a TTL index on the `expires_at` field in Firestore for auto-deletion.
+
+🐛 Troubleshooting
+------------------
+- FirestoreStorage.incr() got unexpected keyword 'amount' → Upgrade Flask-Limiter ≥ 3.5
+- Invalid document key → Avoid slashes in limiter keys
+- 'wrap_exceptions' attribute missing → ensure base_exceptions property exists
+
+🔗 Links
+--------
+- Flask-Limiter: https://flask-limiter.readthedocs.io
+- Firestore: https://cloud.google.com/firestore
+- PyPI: https://pypi.org/project/Flask-Limiter-Firestore
+
+📄 License
+----------
 MIT License © 2025 Delivery Disruptor Inc.
+"""
