@@ -1,31 +1,3 @@
-Got it — you're asking for everything you’ve built and described (including code, usage, install, metadata, and docs) in one single .py file that can serve as:
-
-
-
-
-the source module (flask_limiter_firestore.py)
-
-
-
-
-the installable file via python setup.py
-
-
-
-
-a self-contained PyPI-compatible package
-
-
-
-
-with a built-in docstring at the top that contains your Markdown-style README.
-
-
-
-
-Here is the single copy-pasteable Python file — ready to drop into your GitHub repo or build system:
-
-
 """
 Flask-Limiter-Firestore
 ========================
