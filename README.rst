@@ -60,4 +60,4 @@ Use a TTL index on the `expires_at` field in Firestore for auto-deletion.
 
 📄 License
 ----------
-MIT License © 2025 Delivery Disruptor Inc.
+MIT License
